@@ -1,16 +1,18 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
+import cors from 'cors';
+import logger from 'morgan';
 
 // trying out graphql
 import graphqlHTTP from 'express-graphql';
-import { buildSchema } from'graphql';
+import { buildSchema } from 'graphql';
 
 
 dotenv.config();
 // helpers
-import { httpError, httpMsg } from './src/helper/helper';
- 
+import { sendServerErrorResponse, sendResponse } from './src/helper/helper';
+
 // let schema = buildSchema(`
 //   type Query {
 //     hello: String
@@ -26,19 +28,24 @@ const app = express();
 //   graphiql: true,
 // }));
 
-
+app.use(cors());
+app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/', (req, res) => {
-  httpMsg(res, 200, {}, "welcome to PP(personal  project) API");
+  return sendResponse(res, 200, {}, "welcome to PP(personal  project) API");
 })
 
-app.get("*", (req, res) => {
-  httpError(res, 404, "404 NOT FOUND");
-})
+app.all('*', (req, res) => res.status(404).json({
+  "status_code": 404,
+  "message": "Route unavailable on server.",
+  "success": false
+}));
+
 const PORT = 3001 || process.env.PORT;
 
 app.listen(PORT, () => {
-  console.log(`server started on http://localhost:${PORT}/graphql`);
+  console.log(`server started on http://localhost:${PORT}`);
+  // console.log(`server started on http://localhost:${PORT}/graphql`);
 })
