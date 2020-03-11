@@ -3,15 +3,16 @@ import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import logger from 'morgan';
-
+dotenv.config();
 // trying out graphql
 import graphqlHTTP from 'express-graphql';
 import { buildSchema } from 'graphql';
 
 
-dotenv.config();
+
 // helpers
-import { sendServerErrorResponse, sendResponse } from './src/helper/helper';
+import { sendServerErrorResponse, sendResponse } from './src/helpers';
+
 
 // let schema = buildSchema(`
 //   type Query {
