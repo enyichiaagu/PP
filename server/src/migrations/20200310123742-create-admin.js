@@ -6,6 +6,8 @@ module.exports = {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
+        onDelete: 'cascade',
+        onUpdate: 'cascade',
         type: Sequelize.INTEGER
       },
       fn: {

@@ -1,34 +1,34 @@
-
 import bcrypt from 'bcrypt';
 
-module.exports = {
 
-  sendServerErrorResponse: (res, error) =>
-    res.status(500).json({
-      "status_code": 500,
-      "data": process.env.isProduction ? 'An error occurred on our servers' : error,
-      "status_message": 'Internal server error',
-      "success": false
-    }),
 
-  sendResponse: (res, status_code, data, status_message) => res.status(status_code).json({
-    status_code,
-    data,
-    status_message,
-    "success": true
-  }),
+export const sendServerErrorResponse = (res, error) =>
+  res.status(500).json({
+    "status_code": 500,
+    "data": process.env.isProduction ? 'An error occurred on our servers' : error,
+    "success": false
+  })
 
-  hashPassword: async (password) => {
-    await bcrypt.hash(password, 20).then((hashedPassword) => {
-      return hashedPassword;
-    }).catch(err => { return err });
-  },
+export const sendResponse = (res, status_code, data) => res.status(status_code).json({
+  status_code,
+  data,
+  "success": true
+})
 
-  comparePassword: async (Password, hashPassword) => {
-    await bcrypt.compare(Password, hashPassword).then((result) => {
-      if (result) return true;
-      return false;
-    });
-  }
-
+export const hashPassword = (password) => {
+  return bcrypt.hashSync(password, bcrypt.genSaltSync(10));
 }
+
+export const comparePassword = (hashPassword, password) => {
+  return bcrypt.compareSync(password, hashPassword);
+}
+
+
+const helper = Object.freeze({
+  sendServerErrorResponse,
+  sendResponse,
+  comparePassword,
+  hashPassword
+})
+
+export default helper;

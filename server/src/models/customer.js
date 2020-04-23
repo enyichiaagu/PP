@@ -1,6 +1,6 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  const Customers = sequelize.define('Customers', {
+  const Customers = sequelize.define('customers', {
     fn: DataTypes.STRING,
     ln: DataTypes.STRING,
     fullname: DataTypes.STRING,
@@ -10,15 +10,14 @@ module.exports = (sequelize, DataTypes) => {
     tel: DataTypes.STRING,
     verified: DataTypes.BOOLEAN,
     country: DataTypes.STRING,
-    ip: DataTypes.STRING,
     address: DataTypes.STRING
   }, {});
   Customers.associate = function (models) {
     // associations can be defined here
-    Customers.hasMany(models.Orders,{
-      foreignKey: 'customer_id',
-      as: 'orders'
-    });
+    // Customers.hasMany(models.Orders, {
+    //   foreignKey: 'customer_id',
+    //   as: 'orders'
+    // });
   };
   return Customers;
 };

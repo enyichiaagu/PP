@@ -27,7 +27,12 @@ module.exports = {
         type: Sequelize.STRING
       },
       category_id: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {         // Product belongsTo Category 1:1
+          model: 'categories',
+          key: 'id'
+        }
       }
     });
   },

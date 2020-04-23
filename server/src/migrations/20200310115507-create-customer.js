@@ -6,6 +6,8 @@ module.exports = {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
+        onDelete: 'cascade',
+        onUpdate: 'cascade',
         type: Sequelize.INTEGER
       },
       fn: {
@@ -16,27 +18,27 @@ module.exports = {
       },
       fullname: {
         type: Sequelize.STRING,
-        unique: true
+
       },
       email: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        unique: true
       },
       password: {
         type: Sequelize.STRING
       },
       imgurl: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: true
       },
       tel: {
         type: Sequelize.STRING
       },
       verified: {
-        type: Sequelize.BOOLEAN
+        type: Sequelize.BOOLEAN,
+        defaultValue: false
       },
       country: {
-        type: Sequelize.STRING
-      },
-      ip: {
         type: Sequelize.STRING
       },
       address: {

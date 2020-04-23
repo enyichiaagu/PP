@@ -16,9 +16,19 @@ module.exports = {
       password: 'chuckBASS',
       imgurl: '',
       tel: '+2347062391596',
-      verified: true,
       country: 'Nigeria',
-      ip: '123.145.44.00',
+      address: "7,obasijuade street",
+      createdAt: new Date(),
+      updatedAt: new Date()
+    }, {
+      fn: 'James',
+      ln: 'Doe',
+      fullname: 'James Doe',
+      email: 'demo2@demo.com',
+      password: 'chuckBASS',
+      imgurl: '',
+      tel: '+2347062391596',
+      country: 'Nigeria',
       address: "7,obasijuade street",
       createdAt: new Date(),
       updatedAt: new Date()
